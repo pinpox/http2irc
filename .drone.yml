@@ -18,6 +18,7 @@ steps:
     NIX_PATH: nixpkgs=channel:nixos-unstable
 - name: Notify
   commands:
+  - echo $TOKEN
   - nix run '.#announce-drone'
   # - " -X POST --data '{{.}}' -H \"Token: $TOKEN\""
   environment:
