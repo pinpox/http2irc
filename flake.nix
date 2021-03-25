@@ -42,7 +42,7 @@
             ${curl}/bin/curl -s -H "Content-Type: application/json" -H "$tokenHeader" -X POST --data-binary @- 127.0.0.1:8989/webhook
 
 
-            echo "{ \"plain\": \"a plain message\" } | \
+            echo "{ \"plain\": \"a plain message\" }" | \
             ${curl}/bin/curl -s -H "Content-Type: application/json" -H "$tokenHeader" -X POST --data-binary @- 127.0.0.1:8989/webhook
           '';
 
