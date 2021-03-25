@@ -32,7 +32,7 @@
           announce-drone = pkgs.writeScriptBin "announce-drone" ''
             #!${pkgs.stdenv.shell}
             tokenHeader="Token: $TOKEN"
-            echo "{ \"drone\": \"[$DRONE_COMMIT_REF 🛠 $DRONE_REPO] $DRONE_BUILD_STATUS: \
+            echo "{ \"drone\": \"[$DRONE_REPO 🛠 $DRONE_COMMIT_BRANCH] $DRONE_BUILD_STATUS: \
             $DRONE_COMMIT_MESSAGE - ($DRONE_BUILD_EVENT by $DRONE_COMMIT_AUTHOR) $DRONE_BUILD_LINK\"}" | \
             ${curl}/bin/curl -s -H "Content-Type: application/json" -H "$tokenHeader" -X POST --data-binary @- 127.0.0.1:8989/webhook
           '';
