@@ -5,14 +5,7 @@ with import <nixpkgs>{};
     pname = "http2irc";
     version = "0.1";
 
-    src = pkgs.fetchFromGitHub {
-      owner = "pinpox";
-      repo = "http2irc";
-      # rev = "v${version}";
-      rev = "main";
-      sha256 = "sha256-4x2JidBy9CJRY9g5spI9aWFPFnEHyep4rWyLWgmZUUw=";
-    };
-
+src = ./.;
     vendorSha256 = "sha256-k45e6RSIl3AQdOFQysIwJP9nlYsSFeaUznVIXfbYwLA=";
     subPackages = [ "." ];
 
