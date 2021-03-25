@@ -15,7 +15,7 @@ steps:
   - nix-build
 - name: Notify
   commands:
-  - curl localhost:8989/webhook --header "Content-Type: application/json" --request POST --data '{"repo":"test"}' -H "Token: $TOKEN"
+  - "curl localhost:8989/webhook --header \"Content-Type: application/json\" --request POST --data '{}' -H \"Token: $TOKEN\""
   environment:
     NIX_PATH: nixpkgs=channel:nixos-unstable
     TOKEN:
