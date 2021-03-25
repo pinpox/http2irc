@@ -1,5 +1,4 @@
 {
-
   description = "HTTP (webhook) listener to announce messages in IRC channels";
   inputs.flake-utils.url = "github:numtide/flake-utils";
 
@@ -37,11 +36,10 @@
             ${curl}/bin/curl -s -H "Content-Type: application/json" -H "$tokenHeader" -X POST --data-binary @- 127.0.0.1:8989/webhook
           '';
 
-          announce-test = pkgs.writeScriptBin "announce-test" ''
-            #!${pkgs.stdenv.shell}
-            echo "I'm a bot!"
-          '';
-
+          #announce-test = pkgs.writeScriptBin "announce-test" ''
+          #  #!${pkgs.stdenv.shell}
+          #  echo "I'm a bot!"
+          #'';
         };
 
         defaultPackage = packages.http2irc;
