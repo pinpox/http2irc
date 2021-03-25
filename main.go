@@ -13,6 +13,7 @@ import (
 
 // Configuration variables
 var (
+	botToken     string
 	nick         string
 	channel      string
 	server       string
@@ -27,6 +28,11 @@ var (
 var ircBot *irc.Connection
 
 func handleWebhook(w http.ResponseWriter, r *http.Request) {
+
+	if r.Header.Get("Token") != botToken {
+		http.Error(w, "Not authorized", 401)
+		return
+	}
 
 	var dataPost interface{}
 
@@ -52,6 +58,7 @@ func handleWebhook(w http.ResponseWriter, r *http.Request) {
 func main() {
 
 	nick = os.Getenv("IRC_NICK")
+	botToken = os.Getenv("IRC_BOT_TOKEN")
 	channel = os.Getenv("IRC_CHANNEL")
 	server = os.Getenv("IRC_SERVER")
 	saslUser = os.Getenv("IRC_SASL_USER")
