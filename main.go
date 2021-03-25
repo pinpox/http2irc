@@ -3,12 +3,12 @@ package main
 import (
 	"crypto/tls"
 	"encoding/json"
-	"fmt"
 	"github.com/hoisie/mustache"
 	"github.com/thoj/go-ircevent"
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 )
 
 // Configuration variables
@@ -20,8 +20,8 @@ var (
 	saslUser     string
 	saslPass     string
 	hookListen   string
-	ircDebug     string
-	notice       string
+	ircDebug     bool
+	notice       bool
 	templatePath string
 )
 
@@ -44,16 +44,12 @@ func handleWebhook(w http.ResponseWriter, r *http.Request) {
 	}
 
 	data := mustache.RenderFile(templatePath, dataPost)
-	// fmt.Println(data)
 
-	// ircBot.Privmsg(channel, "msg") // sends a message to either a certain nick or a channel
-	ircBot.Notice(channel, data) //send notices
-
-	// _, err := io.Copy(os.Stdout, r.Body)
-	// if err != nil {
-	// 	log.Println(err)
-	// 	return
-	// }
+	if notice {
+		ircBot.Notice(channel, data)
+	} else {
+		ircBot.Privmsg(channel, data)
+	}
 }
 
 func main() {
@@ -65,35 +61,33 @@ func main() {
 	saslUser = os.Getenv("IRC_SASL_USER")
 	saslPass = os.Getenv("IRC_SASL_PASS")
 	hookListen = os.Getenv("IRC_LISTEN")
-	ircDebug = os.Getenv("IRC_DEBUG")
-	notice = os.Getenv("IRC_NOTICE")
 	templatePath = os.Getenv("IRC_TEMPLATE")
+	ircDebug, _ = strconv.ParseBool(os.Getenv("IRC_DEBUG"))
+	notice, _ = strconv.ParseBool(os.Getenv("IRC_NOTICE"))
 
-	ircBot = irc.IRC(nick, "test") //nick, user
+	// Setup the bot
+	ircBot = irc.IRC(nick, "none") // Don't care about user here, we use SASL
 	ircBot.UseTLS = true
 	ircBot.TLSConfig = &tls.Config{InsecureSkipVerify: true}
-
-	// For debugging info
-	// ircBot.VerboseCallbackHandler = true
-	// ircBot.Debug = true
-
-	ircBot.AddCallback("001", func(e *irc.Event) {
-		ircBot.Join(channel)
-		// ircBot.Privmsg(channel, "Hi, I'm a bot.")
-	})
+	ircBot.AddCallback("001", func(e *irc.Event) { ircBot.Join(channel) })
 	ircBot.UseSASL = true
 	ircBot.SASLLogin = saslUser
 	ircBot.SASLPassword = saslPass
 
+	if ircDebug {
+		ircBot.VerboseCallbackHandler = true
+		ircBot.Debug = true
+	}
+
 	err := ircBot.Connect(server)
 	if err != nil {
-		fmt.Printf("Err %s", err)
+		log.Printf("Err %s", err)
 		return
 	}
 	go ircBot.Loop()
 
+	// Setup the handler
 	http.HandleFunc("/webhook", handleWebhook)
-
 	log.Println("server started")
 	log.Fatal(http.ListenAndServe(hookListen, nil))
 }
