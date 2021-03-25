@@ -40,7 +40,7 @@ func handleWebhook(w http.ResponseWriter, r *http.Request) {
 	// fmt.Println(data)
 
 	// ircBot.Privmsg(channel, "msg") // sends a message to either a certain nick or a channel
-	ircBot.Notice(channel, data) //send nocitce
+	ircBot.Notice(channel, data) //send notices
 
 	// _, err := io.Copy(os.Stdout, r.Body)
 	// if err != nil {
@@ -52,8 +52,8 @@ func handleWebhook(w http.ResponseWriter, r *http.Request) {
 func main() {
 
 	nick = os.Getenv("IRC_NICK")
-	channel = os.Getenv("IRC_CHANNEL") //#go-karma-bot
-	server = os.Getenv("IRC_SERVER")   //#"irc.freenode.net:7000"
+	channel = os.Getenv("IRC_CHANNEL")
+	server = os.Getenv("IRC_SERVER")
 	saslUser = os.Getenv("IRC_SASL_USER")
 	saslPass = os.Getenv("IRC_SASL_PASS")
 	hookListen = os.Getenv("IRC_LISTEN")
