@@ -29,7 +29,8 @@ var ircBot *irc.Connection
 
 func handleWebhook(w http.ResponseWriter, r *http.Request) {
 
-	if r.Header.Get("Token") != botToken {
+	// Check the content of the token and if it is set (lenght > 0 )
+	if r.Header.Get("Token") != botToken || len(r.Header.Get("Token") == 0) {
 		http.Error(w, "Not authorized", 401)
 		return
 	}
