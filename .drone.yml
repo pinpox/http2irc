@@ -12,19 +12,13 @@ clone:
 steps:
 - name: Build
   commands:
-  - echo "disabled"
-  # - nix-build -v
+  - nix-build -v
   environment:
     NIX_PATH: nixpkgs=channel:nixos-unstable
 - name: Notify
   commands:
-  - echo $TOKEN
   - nix run '.#announce-drone'
-  # - " -X POST --data '{{.}}' -H \"Token: $TOKEN\""
   environment:
     NIX_PATH: nixpkgs=channel:nixos-unstable
     TOKEN:
       from_secret: irc_token
-# - name: Run Go tests
-#   commands:
-#   - go test
