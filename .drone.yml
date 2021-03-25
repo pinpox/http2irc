@@ -20,7 +20,7 @@ steps:
   commands: >
     "nix run nixpkgs#curl -- 127.0.0.1:8989/webhook
     -X POST
-    --data '{}'
+    --data '{\"type\": \"drone\", \"data\": {{build.author}} }'
     -H \"Token: $TOKEN\""
   environment:
     TOKEN:
