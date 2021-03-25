@@ -12,14 +12,15 @@ clone:
 steps:
 - name: Build
   commands:
-  - nix-build
+  - nix-build -v
   environment:
     NIX_PATH: nixpkgs=channel:nixos-unstable
 - name: Notify
   commands:
-  - "curl localhost:8989/webhook --header \"Content-Type: application/json\" --request POST --data '{}' -H \"Token: $TOKEN\""
+  - "nix run nixpkgs#curl localhost:8989/webhook --header \"Content-Type: application/json\" --request POST --data '{}' -H \"Token: $TOKEN\""
   environment:
     TOKEN:
+      NIX_PATH: nixpkgs=channel:nixos-unstable
       from_secret: irc_token
 # - name: Run Go tests
 #   commands:
