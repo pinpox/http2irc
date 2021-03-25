@@ -21,8 +21,8 @@ steps:
   - nix run '.#announce-drone'
   # - " -X POST --data '{{.}}' -H \"Token: $TOKEN\""
   environment:
+    NIX_PATH: nixpkgs=channel:nixos-unstable
     TOKEN:
-      NIX_PATH: nixpkgs=channel:nixos-unstable
       from_secret: irc_token
 # - name: Run Go tests
 #   commands:
