@@ -13,8 +13,6 @@ steps:
 - name: Build
   commands:
   - nix-build
-  environment:
-    NIX_PATH: nixpkgs=channel:nixos-unstable
 - name: Notify
   commands:
   - curl localhost:8989/webhook --header "Content-Type: application/json" --request POST --data '{"repo":"test"}' -H "Token: $TOKEN"
