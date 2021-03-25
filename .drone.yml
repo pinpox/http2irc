@@ -13,6 +13,8 @@ steps:
 - name: Build
   commands:
   - nix-build
+  environment:
+    NIX_PATH: nixpkgs=channel:nixos-unstable
 # - name: Run Go tests
 #   commands:
 #   - go test
