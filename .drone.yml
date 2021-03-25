@@ -18,7 +18,7 @@ steps:
     NIX_PATH: nixpkgs=channel:nixos-unstable
 - name: Notify
   commands:
-    - env
+    - env | grep DRONE
     # - " -X POST --data '{{.}}' -H \"Token: $TOKEN\""
   environment:
     TOKEN:
