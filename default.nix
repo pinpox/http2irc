@@ -10,7 +10,7 @@ with import <nixpkgs>{};
       repo = "http2irc";
       # rev = "v${version}";
       rev = "main";
-      sha256 = "sha256-hq83FdSaHe6xrFPMngILNOUP++lYNrBYiuPRivNLqqc=";
+      sha256 = "sha256-4x2JidBy9CJRY9g5spI9aWFPFnEHyep4rWyLWgmZUUw=";
     };
 
     vendorSha256 = "sha256-k45e6RSIl3AQdOFQysIwJP9nlYsSFeaUznVIXfbYwLA=";
