@@ -18,10 +18,10 @@ steps:
     NIX_PATH: nixpkgs=channel:nixos-unstable
 - name: Notify
   commands: >
-    nix run nixpkgs#curl -- 127.0.0.1:8989/webhook
+    "nix run nixpkgs#curl -- 127.0.0.1:8989/webhook
     -X POST
     --data '{}'
-    -H "Token: $TOKEN"
+    -H \"Token: $TOKEN\""
   environment:
     TOKEN:
       NIX_PATH: nixpkgs=channel:nixos-unstable
