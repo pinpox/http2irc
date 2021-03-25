@@ -16,4 +16,14 @@ available:
 | IRC_DEBUG     | false                 | Verbose output                 |
 | IRC_NOTICE    | true                  | Use notice instead of messages |
 | IRC_TEMPLATE  | ./example.tmpl        | Path to the template           |
+| IRC_BOT_TOKEN | myverysecrettoken     | Token for the bot              |
 
+## Write a message
+
+```bash
+curl localhost:8989/webhook 
+--header "Content-Type: application/json" \
+--header  "Token: myverysecrettoken" \
+--request POST \
+--data '{"data":"test"}' 
+```
