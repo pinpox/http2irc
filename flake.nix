@@ -37,7 +37,7 @@
             echo "${curl}/bin/curl -s -H \"Content-Type: application/json\" -H \"Token: $TOKEN\" -X POST --data-binary @- 127.0.0.1:8989/webhook"
 
 
-            echo "{ \"data\": \"[$DRONE_REPO - $DRONE_COMMIT_REF] $DRONE_BUILD_STATUS: \
+            echo "{ \"type\": \"drone\", \"data\": \"[$DRONE_REPO - $DRONE_COMMIT_REF] $DRONE_BUILD_STATUS: \
             $DRONE_COMMIT_MESSAGE - $DRONE_COMMIT_AUTHOR $DRONE_BUILD_EVENT $DRONE_BUILD_LINK\"}" | \
             ${curl}/bin/curl -s -H "Content-Type: application/json" -H "$tokenHeader" -X POST --data-binary @- 127.0.0.1:8989/webhook
           '';
