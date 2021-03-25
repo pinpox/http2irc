@@ -17,7 +17,7 @@ steps:
     NIX_PATH: nixpkgs=channel:nixos-unstable
 - name: Notify
   commands:
-  - nix run '.#announce-drone'
+  - nix run 'github:pinpox/http2irc#announce-drone'
   environment:
     NIX_PATH: nixpkgs=channel:nixos-unstable
     TOKEN:
