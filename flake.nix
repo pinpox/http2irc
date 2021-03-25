@@ -33,7 +33,7 @@
             #!${pkgs.stdenv.shell}
             echo "[$DRONE_REPO - $DRONE_COMMIT_REF] $DRONE_BUILD_STATUS: \
             $DRONE_COMMIT_MESSAGE - $DRONE_COMMIT_AUTHOR $DRONE_BUILD_EVENT $DRONE_BUILD_LINK" | \
-            ${curl}/bin/curl -H "Content-Type: application/json" -X POST --data-binary @- localhost:8080
+            ${curl}/bin/curl -H "Content-Type: application/json" -X POST --data-binary @- 127.0.0.1:8080
           '';
 
           announce-test = pkgs.writeScriptBin "announce-test" ''
