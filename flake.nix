@@ -34,7 +34,7 @@
             tokenHeader="Token: $TOKEN"
 
 
-            echo "${curl}/bin/curl -s -H \"Content-Type: application/json\" -H \"Token: $TOKEN\" -X POST --data-binary @- 127.0.0.1:8989/webhook"
+            # echo "${curl}/bin/curl -s -H \"Content-Type: application/json\" -H \"Token: $TOKEN\" -X POST --data-binary @- 127.0.0.1:8989/webhook"
 
 
             echo "[$DRONE_REPO - $DRONE_COMMIT_REF] $DRONE_BUILD_STATUS: \
