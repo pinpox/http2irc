@@ -14,7 +14,7 @@
             version = "0.1";
 
             src = ./.;
-            vendorSha256 =
+            vendorHash =
               "sha256-k45e6RSIl3AQdOFQysIwJP9nlYsSFeaUznVIXfbYwLA=";
             subPackages = [ "." ];
 
